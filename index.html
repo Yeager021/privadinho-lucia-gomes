@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página de Lucia Gomes</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1c1c1c;
+      color: white;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      background-color: black;
+      padding: 15px;
+    }
+    .avatar-container {
+      position: relative;
+      width: 50px;
+      height: 50px;
+      margin-right: 15px;
+    }
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .online-status {
+      position: absolute;
+      bottom: 5px;
+      right: -6px;
+      width: 10px;
+      height: 10px;
+      background-color: #00ff00;
+      border: 2px solid black;
+      border-radius: 50%;
+    }
+    .info {
+      display: flex;
+      flex-direction: column;
+    }
+    .info h1 {
+      font-size: 18px;
+      margin: 0;
+    }
+    .info p {
+      font-size: 12px;
+      color: #ccc;
+      margin: 0;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+    }
+    .card {
+      background-color: #2a2a2a;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 10px;
+      width: 400px;
+      display: flex;
+      justify-content: center;
+    }
+    video {
+      width: 100%;
+      border-radius: 8px;
+    }
+    #loadMore {
+      background-color: #444;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      margin: 20px auto;
+      cursor: pointer;
+      display: block;
+    }
+    #loadMore:hover {
+      background-color: #666;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="avatar-container">
+      <img class="avatar" src="https://www.dropbox.com/scl/fi/rel8v7mnkpqgskdpcl27w/perfil-site.png?rlkey=38a9y7idhj1k29qehvh0g8i9s&st=gglfn4mo&dl=1" alt="Foto de perfil">
+      <div class="online-status"></div>
+    </div>
+    <div class="info">
+      <h1>Lucia Gomes</h1>
+      <p id="data-atual"></p>
+    </div>
+  </header>
+
+  <div class="container" id="videoContainer"></div>
+  <button id="loadMore">Carregar mais</button>
+
+  <script>
+    function atualizarData() {
+      const hoje = new Date();
+      const dia = String(hoje.getDate()).padStart(2, '0');
+      const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+      const ano = hoje.getFullYear();
+      document.getElementById("data-atual").innerText = `conteúdos atualizados hoje ${dia}/${mes}/${ano}`;
+    }
+    atualizarData();
+
+    // ==========================
+    // LISTA DOS 69 VÍDEOS AQUI
+    // Substitua cada link pelo link do seu Dropbox (com dl=1 no final)
+    // ==========================
+    const videos = [
+"https://www.dropbox.com/scl/fi/ntz4795wjkym8p9tzkvg3/09.mp4?rlkey=wxxl87gvjafcytzxh3bg2319i&st=tm9ufv3r&dl=1",            "https://www.dropbox.com/scl/fi/wkosnauig28k7150dbsex/01.mp4?rlkey=aguzb62z3j5coi51lipwpbqw6&st=1kwmon6x&dl=1",
+      "https://www.dropbox.com/scl/fi/cufvbdi2iehkxnohmjhrk/23.mp4?rlkey=otktqbm0xrnd78ufd5snvxql9&st=nm8qx46s&dl=1",
+
+"https://www.dropbox.com/scl/fi/0x7lwdagpxvscp95tv1r4/35.mp4?rlkey=ivtsf0023ini45bi7c74jc504&st=2v706p6w&dl=1",
+
+"https://www.dropbox.com/scl/fi/3shl97wftvos6qxl62ajw/59.mp4?rlkey=3s5d3m79rof83hcx4ruwjfbsy&st=1e5a3ujk&dl=1",
+
+"https://www.dropbox.com/scl/fi/ntz4795wjkym8p9tzkvg3/09.mp4?rlkey=wxxl87gvjafcytzxh3bg2319i&st=tm9ufv3r&dl=1",
+
+"https://www.dropbox.com/scl/fi/khfjck1417udw15rkpymi/20.mp4?rlkey=hy7bf25z9e2eteuquy305ixhy&st=55tegzpt&dl=1",
+
+"https://www.dropbox.com/scl/fi/r94wpjvldpgjpxd4ymchd/22.mp4?rlkey=6p04dqyo3w5a0t5eo5xuy6hfv&st=mu8fkfvw&dl=1",
+
+"https://www.dropbox.com/scl/fi/2efjzit0nrzx9x78c6zjb/40.mp4?rlkey=3wxj8e7gxagrdgkfxieuxwseq&st=rg9b5wat&dl=1",
+
+"https://www.dropbox.com/scl/fi/gppy7nnz44qm7gr7r1zhh/44.mp4?rlkey=g7qj1e5yknm5l0x9ostgqsdri&st=e6gqyskp&dl=1",
+
+"https://www.dropbox.com/scl/fi/gdsr8lvsxxjjcjft1zr63/74.mp4?rlkey=qchspm4wwbtsznqg4u6vqqna2&st=hr1ya22y&dl=1",
+      // ... continue até 69 links
+    ];
+
+    const container = document.getElementById("videoContainer");
+    const loadMoreBtn = document.getElementById("loadMore");
+    let videosCarregados = 0;
+
+    // ==========================
+    // ALTERE AQUI PARA DEFINIR QUANTOS VÍDEOS CARREGAM POR VEZ
+    // Exemplo: 5 significa que serão carregados 5 por clique
+    // ==========================
+    const quantidadePorVez = 5;
+
+    function carregarVideos() {
+      const proximoLote = videos.slice(videosCarregados, videosCarregados + quantidadePorVez);
+      proximoLote.forEach(link => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `<video controls><source src="${link}" type="video/mp4"></video>`;
+        container.appendChild(card);
+      });
+      videosCarregados += quantidadePorVez;
+
+      if (videosCarregados >= videos.length) {
+        loadMoreBtn.style.display = "none";
+      }
+    }
+
+    loadMoreBtn.addEventListener("click", carregarVideos);
+
+    // Carregar os primeiros vídeos automaticamente
+    carregarVideos();
+  </script>
+</body>
+</html>
