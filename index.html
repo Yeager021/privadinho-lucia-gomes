@@ -132,7 +132,7 @@
       proximoLote.forEach(link => {
         const card = document.createElement("div");
         card.className = "card";
-        card.innerHTML = `<video controls controlsList="nodownload"><source src="${link}" type="video/mp4"></video>`;
+        card.innerHTML = `<video controls controlsList="nodownload" oncontextmenu="return false;"><source src="${link}" type="video/mp4"></video>`;
         container.appendChild(card);
       });
       videosCarregados += quantidadePorVez;
@@ -140,11 +140,33 @@
       if (videosCarregados >= videos.length) {
         loadMoreBtn.style.display = "none";
       }
+
+      // aplica bloqueio de toque longo nos vídeos recém carregados
+      bloquearToqueLongo();
     }
 
     loadMoreBtn.addEventListener("click", carregarVideos);
 
     carregarVideos();
+
+    // ==========================
+    // BLOQUEIO DE TOQUE LONGO / CONTEXTO
+    // ==========================
+    function bloquearToqueLongo() {
+      const videos = document.querySelectorAll("video");
+      videos.forEach(video => {
+        // bloqueia menu do botão direito
+        video.addEventListener("contextmenu", e => e.preventDefault());
+
+        // bloqueia long-press no mobile
+        video.addEventListener("touchstart", e => {
+          video.longPressTimer = setTimeout(() => {
+            e.preventDefault();
+          }, 600); // 600ms = tempo típico para abrir menu
+        });
+        video.addEventListener("touchend", () => clearTimeout(video.longPressTimer));
+      });
+    }
   </script>
 </body>
 </html>
