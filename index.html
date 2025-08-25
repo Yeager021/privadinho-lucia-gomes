@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
@@ -8,13 +8,13 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #1c1c1c;
+      background-color: #000; /* preto puro */
       color: white;
     }
     header {
       display: flex;
       align-items: center;
-      background-color: black;
+      background-color: #000; /* igual ao body */
       padding: 15px;
     }
     .avatar-container {
@@ -59,11 +59,12 @@
       margin-top: 30px;
     }
     .card {
-      background-color: #111; /* ESCURECIDO */
+      background-color: #111;
       padding: 20px;
       border-radius: 10px;
       margin: 10px;
-      width: 400px;
+      width: 100%;         /* ocupa toda a largura disponível */
+      max-width: 400px;    /* limite no desktop */
       display: flex;
       justify-content: center;
     }
@@ -72,30 +73,25 @@
       border-radius: 8px;
     }
     #loadMore {
-  background: #111; /* preto suave */
-  color: #fff;      /* texto branco */
-  border: 2px solid #fff; /* contorno branco fino */
-  padding: 12px 25px;
-  border-radius: 12px;
-  margin: 20px auto;
-  cursor: pointer;
-  display: block;
-  font-size: 16px;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2); /* leve brilho branco */
-}
-
-#loadMore:hover {
-  background: #000; /* preto total no hover */
-  transform: scale(1.05);
-  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.4); /* aumenta o brilho no hover */
-}
-
-}
-#666;
+      background: #111;
+      color: #fff;
+      border: 2px solid #fff;
+      padding: 12px 25px;
+      border-radius: 12px;
+      margin: 20px auto;
+      cursor: pointer;
+      display: block;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+    }
+    #loadMore:hover {
+      background: #000;
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(255, 255, 255, 0.4);
     }
   </style>
 </head>
