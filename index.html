@@ -72,9 +72,9 @@
       border-radius: 8px;
     }
     #loadMore {
-  background: linear-gradient(90deg, #ff0066, #ffcc00); /* gradiente chamativo */
-  color: white;
-  border: none;
+  background: #111; /* preto suave */
+  color: #fff;      /* texto branco */
+  border: 2px solid #fff; /* contorno branco fino */
   padding: 12px 25px;
   border-radius: 12px;
   margin: 20px auto;
@@ -84,13 +84,16 @@
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 12px rgba(255, 0, 100, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2); /* leve brilho branco */
 }
 
 #loadMore:hover {
+  background: #000; /* preto total no hover */
   transform: scale(1.05);
-  box-shadow: 0 6px 16px rgba(255, 0, 100, 0.6);
+  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.4); /* aumenta o brilho no hover */
+}
+
 }
 #666;
     }
@@ -201,7 +204,7 @@
     const loadMoreBtn = document.getElementById("loadMore");
     let videosCarregados = 0;
 
-    const quantidadePorVez = 80;
+    const quantidadePorVez = 5;
 
     function carregarVideos() {
       const proximoLote = videos.slice(videosCarregados, videosCarregados + quantidadePorVez);
